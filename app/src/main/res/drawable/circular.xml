@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--써클 프로그레스용-->
+<!--android:innerRadiusRatio="5"-->
+    <!--android:thickness="3.8sp"-->
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:useLevel="true"
+    android:innerRadiusRatio="5"
+    android:shape="ring"
+    android:thickness="12sp" >
+
+    <solid android:color="#2455d8" />
+</shape>
