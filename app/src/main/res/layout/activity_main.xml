@@ -36,7 +36,7 @@
             app:srcCompat="@drawable/jfitlogo"/>
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/btnWalking"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -44,27 +44,27 @@
             android:background="@android:color/background_light"
             android:paddingBottom="0dp"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/walkinglogo"/>
+            app:srcCompat="@drawable/walkinglogo" />
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/btnWorkout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:layout_weight="1"
             android:background="@android:color/background_light"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/workoutlogo"/>
+            app:srcCompat="@drawable/workoutlogo" />
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/btnWeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
             android:background="@android:color/background_light"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/weightlogo"/>
+            app:srcCompat="@drawable/weightlogo" />
 
         <Button
             android:id="@+id/btnTest"

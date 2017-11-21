@@ -9,9 +9,9 @@ import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageButton mImageButton;
-    ImageButton mImageButton2;
-    ImageButton mImageButton3;
+    ImageButton WalkingButton;
+    ImageButton WorkoutButton;
+    ImageButton WeightButton;
     Button mButton;
 
 
@@ -21,12 +21,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mImageButton = (ImageButton) findViewById(R.id.imageButton);
-        mImageButton2 = (ImageButton) findViewById(R.id.imageButton2);
-        mImageButton3 = (ImageButton) findViewById(R.id.imageButton3);
+        WalkingButton = (ImageButton) findViewById(R.id.btnWalking);
+        WorkoutButton = (ImageButton) findViewById(R.id.btnWorkout);
+        WeightButton = (ImageButton) findViewById(R.id.btnWeight);
         mButton = (Button) findViewById(R.id.btnTest);
 
-        mImageButton.setOnClickListener(new View.OnClickListener() {
+        WalkingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), StepperActivity.class);
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mImageButton2.setOnClickListener(new View.OnClickListener() {
+        WorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), WorkoutActivity.class);
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mImageButton3.setOnClickListener(new View.OnClickListener() {
+        WeightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), WeightActivity.class);
