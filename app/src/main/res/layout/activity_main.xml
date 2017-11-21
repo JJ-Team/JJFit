@@ -1,92 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/holo_orange_light"
-    tools:context="fit.korea2canada.com.jjfitv1.MainActivity"
-    android:weightSum="1">
+    android:weightSum="1"
+    tools:context="fit.korea2canada.com.jjfitv1.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Step Count since reboot : "
-        android:textColor="@android:color/white"
-        android:textSize="24sp"/>
-
-    <TextView
-        android:id="@+id/count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Step Count"
-        android:textColor="@android:color/white"
-        android:textSize="36dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView"
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:baselineAlignBottom="false"
+            android:clickable="false"
+            android:paddingBottom="0dp"
+            android:paddingTop="0dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/jfitlogo"/>
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@android:color/background_light"
+            android:paddingBottom="0dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/walkinglogo"/>
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="1"
+            android:background="@android:color/background_light"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/workoutlogo"/>
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:background="@android:color/background_light"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/weightlogo"/>
+
+        <Button
+            android:id="@+id/btnTest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            />
+            android:text="Button"/>
+
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Timer : "
-        android:textColor="@android:color/white"
-        android:textSize="24sp"/>
-
-    <Button
-        android:id="@+id/timerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start"/>
-
-    <TextView
-        android:id="@+id/mTimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Bar timer"
-        android:textColor="@android:color/white"
-        android:textSize="36dp"/>
-
-    <Button
-        android:id="@+id/barButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onBtnClick"
-        android:text="bar Start"/>
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.41"/>
-    <Button
-        android:id="@+id/barButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onBtnClick2"
-        android:text="bar2 Start"/>
-
-    <ProgressBar
-        android:id="@+id/progressBar2"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:max="500"
-        android:progress="0"
-        android:progressDrawable="@drawable/circular"/>
 
 </LinearLayout>
