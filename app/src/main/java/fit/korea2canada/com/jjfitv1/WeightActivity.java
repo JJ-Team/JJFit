@@ -32,6 +32,8 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     };
 
+    //DB : date + weight / set data
+
 
     //그래픽 적용위해 aChartEngine 추가
     @Override
@@ -63,11 +65,11 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
     private void drawChart(){
         int[] x = { 1,2,3,4,5,6,7,8 };
         int[] weight = { 69, 67, 68, 67, 66, 66, 65, 61};
-        int[] set = {60, 60, 60, 60, 60, 60, 60, 60,};
+        int[] set = {60, 60, 60, 60, 60, 60, 60, 60};
 
         // Creating an  XYSeries for Weight
         XYSeries weightSeries = new XYSeries("Weight");
-        XYSeries setSeries = new XYSeries("Goal Weight");
+        XYSeries setSeries = new XYSeries("Goal");
 
         // Adding data to Weight
         for(int i=0;i<x.length;i++){
