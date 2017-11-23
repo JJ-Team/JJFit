@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.chart.PointStyle;
@@ -21,10 +22,18 @@ import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class WeightActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener {
     TextView textview;
     ImageButton mWeightplus;
     ImageButton mWeightgoalset;
+
+    ArrayList<Integer> x = new ArrayList<Integer>();
+    ArrayList<Double> weight = new ArrayList<Double>();
+    ArrayList<Double> set = new ArrayList<Double>();
+
 
     private View chart;
     private String[] mMonth = new String[] {
@@ -45,13 +54,17 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
         mWeightplus = (ImageButton) findViewById(R.id.btnWeightPlus);
         mWeightgoalset = (ImageButton) findViewById(R.id.btnWeightSet);
 
+        x.addAll(Arrays.asList(1,2,3,4,5,6,7,8));
+        weight.addAll(Arrays.asList(69.0,67.0,68.0,67.7,66.0,66.0,65.0,61.5));
+        set.addAll(Arrays.asList(60.5,60.5,60.5,60.5,60.5,55.5,55.5,55.5));
+
         //Draw Chart
         drawChart();
 
         mWeightplus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               show();     
+               show();
             }
         });
         mWeightgoalset.setOnClickListener(new View.OnClickListener() {
@@ -60,21 +73,57 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
                show2();
             }
         });
+
+//        int xLast2 = x.get(x.size()-1);
+//        double weightLast = weight.get(weight.size()-1);
+//        double setLast = set.get(set.size()-1);
+//        Toast.makeText(this, "/wei Last: " + weightLast + "/set Last: " + setLast + "/x : " + xLast2, Toast.LENGTH_LONG).show();
+//
+        Button mBtnTest = (Button) findViewById(R.id.btnTest);
+        mBtnTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int xLast2 = x.get(x.size()-1);
+                double weightLast = weight.get(weight.size()-1);
+                double setLast = set.get(set.size()-1);
+                Toast.makeText(getApplicationContext(), "/wei Last: " + weightLast + "/set Last: " + setLast + "/x : " + xLast2, Toast.LENGTH_LONG).show();
+
+            }
+        });
     }
 
-    private void drawChart(){
-        int[] x = { 1,2,3,4,5,6,7,8 };
-        int[] weight = { 69, 67, 68, 67, 66, 66, 65, 61};
-        int[] set = {60, 60, 60, 60, 60, 60, 60, 60};
+//    private void drawChart(){
+    public void drawChart(){
+        //Save Weight - 1st done
+//        int[] x = { 1,2,3,4,5,6,7,8 };
+//        int[] weight = { 69, 67, 68, 67, 66, 66, 65, 61};
+//        int[] set = {60, 60, 60, 60, 60, 60, 60, 60};
+
+        //2nd for Save Weight -- ing  ==============
+
+//        x.addAll(Arrays.asList(1,2,3,4,5,6,7,8));
+//        weight.addAll(Arrays.asList(69.0,67.0,68.0,67.7,66.0,66.0,65.0,61.5));
+//        set.addAll(Arrays.asList(60.5,60.5,60.5,60.5,60.5,55.5,55.5,55.5));
+
+
+        Log.d(Arrays.toString(x.toArray()), "x값: ");
+        Log.d(Arrays.toString(weight.toArray()), "we값: ");
+        Log.d(Arrays.toString(set.toArray()), "set값: ");
+
+        //여기까지===================
 
         // Creating an  XYSeries for Weight
         XYSeries weightSeries = new XYSeries("Weight");
         XYSeries setSeries = new XYSeries("Goal");
 
         // Adding data to Weight
-        for(int i=0;i<x.length;i++){
-            weightSeries.add(x[i], weight[i]);
-            setSeries.add(x[i],set[i]);
+//        for(int i=0;i<x.length;i++){
+//        weightSeries.add(x[i], weight[i]);
+//        setSeries.add(x[i],set[i]);
+//    }
+        for(int i=0;i<x.size();i++){
+            weightSeries.add(x.get(i), weight.get(i));
+            setSeries.add(x.get(i), set.get(i));
         }
 
         // Creating a dataset to hold each series
@@ -110,7 +159,10 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
         multiRenderer.setZoomButtonsVisible(true);
 
 
-        for(int i=0;i<x.length;i++){
+//        for(int i=0;i<x.length;i++){
+//            multiRenderer.addXTextLabel(i+1, mMonth[i]);
+//        }
+        for(int i=0;i<x.size();i++){
             multiRenderer.addXTextLabel(i+1, mMonth[i]);
         }
 
@@ -168,6 +220,16 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
             @Override
             public void onClick(View v) {
                 textview.setText(String.valueOf("Your Weight is: " + np.getValue() + "." + np2.getValue())); //set the value to textview
+
+                x.add(x.size()+1);
+                String weightString = np.getValue() + "." + np2.getValue();
+                Toast.makeText(getApplicationContext(), weightString, Toast.LENGTH_LONG).show();
+                String setString = String.valueOf(set.get(set.size()-1));
+//                String setString = "40.00";  // set value to chk
+                double doubleWeight = Double.parseDouble(weightString);
+                weight.add(doubleWeight);
+                double doubleSet = Double.parseDouble(setString);
+                set.add(doubleSet);
                 d.dismiss();
             }
         });
@@ -178,6 +240,8 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
                 d.dismiss(); // dismiss the dialog
             }
         });
+
+        //아래는 원래 있던..================
         d.show();
     }
 
