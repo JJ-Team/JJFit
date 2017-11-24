@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/JJFit.iml" filepath="$PROJECT_DIR$/JJFit.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libProgress/libProgress.iml" filepath="$PROJECT_DIR$/libProgress/libProgress.iml" />
     </modules>
   </component>
 </project>

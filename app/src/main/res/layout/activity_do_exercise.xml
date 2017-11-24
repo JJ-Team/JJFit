@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:circular="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,17 +16,17 @@
         <TextView
             android:id="@+id/textView5"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="68dp"
             android:fontFamily="monospace"
             android:paddingBottom="20dp"
             android:paddingTop="10dp"
             android:text="Workout"
             android:textAlignment="center"
             android:textColor="?attr/colorControlNormal"
-            android:textSize="45sp"/>
+            android:textSize="35sp" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/txtWorkoutName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
@@ -34,41 +34,27 @@
             android:text="1. Jumping Jack"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
-            android:textSize="24sp"
-            android:textStyle="bold|italic"/>
+            android:textSize="20sp"
+            android:textStyle="bold|italic" />
 
 
-        <ImageView
+        <WebView
+            android:id="@+id/imgWorkout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/jumping"/>
+            android:layout_height="172dp" />
 
-        <ProgressBar
-            android:id="@+id/progressBar2"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
+        <com.lylc.widget.circularprogressbar.CircularProgressBar
+            android:id="@+id/progBar"
+            style="@style/Widget.ProgressBar.Holo.CircularProgressBar"
+            android:layout_width="327dp"
+            android:layout_height="226dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:max="500"
+            android:max="15000"
+            android:onClick="onClickProgress"
             android:progress="0"
-            android:progressDrawable="@drawable/circular"/>
-
-        <TextView
-            android:id="@+id/textCount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:textAlignment="center"
-            android:textColor="@android:color/holo_green_dark"
-            android:textSize="36sp"/>
-
-        <Button
-            android:id="@+id/barButton2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onBtnClick2"
-            android:text="bar2 Start"/>
+            circular:cpb_subtitle="subtitle"
+            circular:cpb_title="Title" />
 
     </LinearLayout>
 
