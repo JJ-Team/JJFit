@@ -1,15 +1,11 @@
 package fit.korea2canada.com.jjfitv1;
 
-import android.animation.ObjectAnimator;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.animation.DecelerateInterpolator;
 import android.webkit.WebView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.lylc.widget.circularprogressbar.CircularProgressBar;
 
 public class DoExercise extends AppCompatActivity {
@@ -18,12 +14,12 @@ public class DoExercise extends AppCompatActivity {
     CircularProgressBar progressBar;
 
     private String[] workoutTitle = new String[] {
-            "1. Jumping Jack", "2. Jumping" , "3. Jumping", "4. Jumping", "5. Jumping", "6. Jumping",
-            "7. Jumping", "8. Jumping", "9. Jumping", "10. Jumping", "11. Jumping", "12. Jumping"
+            "1. Jumping Jack", "2. Wall Sit" , "3. Push-up", "4. Abdominal Crunch", "5. Step-up onto Chair", "6. Squat",
+            "7. Triceps Dip on Chair", "8. Plank", "9. High Knees", "10. Lunge", "11. Push-up and Rotation", "12. Side Plank"
     };
     private String[] workImageName = new String[] {
-            "workout1.html", "2. Jumping" , "3. Jumping", "4. Jumping", "5. Jumping", "6. Jumping",
-            "7. Jumping", "8. Jumping", "9. Jumping", "10. Jumping", "11. Jumping", "12. Jumping"
+            "workout1.html", "workout2.html" , "workout3.html", "workout4.html", "workout5.html", "workout6.html",
+            "workout7.html", "workout8.html", "workout9.html", "workout10.html", "workout12.html", "workout12.html"
     };
 
     @Override
