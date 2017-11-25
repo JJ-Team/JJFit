@@ -45,6 +45,7 @@ public class DoExercise extends AppCompatActivity {
 
             @Override
             public void onAnimationFinish() {
+                progressBar.setTitle("Done");
                 progressBar.setSubTitle("");
             }
 
