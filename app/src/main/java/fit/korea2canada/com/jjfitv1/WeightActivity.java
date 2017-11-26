@@ -22,6 +22,13 @@ import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -43,7 +50,6 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
 
     //DB : date + weight / set data
 
-
     //그래픽 적용위해 aChartEngine 추가
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +60,11 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
         mWeightplus = (ImageButton) findViewById(R.id.btnWeightPlus);
         mWeightgoalset = (ImageButton) findViewById(R.id.btnWeightSet);
 
-        x.addAll(Arrays.asList(1,2,3,4,5,6,7,8));
-        weight.addAll(Arrays.asList(69.0,67.0,68.0,67.7,66.0,66.0,65.0,61.5));
-        set.addAll(Arrays.asList(60.5,60.5,60.5,60.5,60.5,55.5,55.5,55.5));
+//        x.addAll(Arrays.asList(1,2,3));
+//        weight.addAll(Arrays.asList(69.0,67.0,68.0));
+//        set.addAll(Arrays.asList(60.0,63.0,63.0));
 
+//        readFile();
         //Draw Chart
         drawChart();
 
@@ -65,12 +72,15 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
             @Override
             public void onClick(View v) {
                show();
+//               onRestart();
+//                mChartView.repaint();
             }
         });
         mWeightgoalset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                show2();
+//               onRestart();
             }
         });
 
@@ -79,20 +89,173 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
 //        double setLast = set.get(set.size()-1);
 //        Toast.makeText(this, "/wei Last: " + weightLast + "/set Last: " + setLast + "/x : " + xLast2, Toast.LENGTH_LONG).show();
 //
+        //추가버튼 -> 어레이 확인용
         Button mBtnTest = (Button) findViewById(R.id.btnTest);
         mBtnTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int xLast2 = x.get(x.size()-1);
-                double weightLast = weight.get(weight.size()-1);
-                double setLast = set.get(set.size()-1);
-                Toast.makeText(getApplicationContext(), "/wei Last: " + weightLast + "/set Last: " + setLast + "/x : " + xLast2, Toast.LENGTH_LONG).show();
+                if(x.size() == 0) {
+                    Toast.makeText(getApplicationContext(), "어레이에 데이터 없음", Toast.LENGTH_SHORT).show();
+                } else {
+                    int xLast2 = x.get(x.size()-1);
+                    double weightLast = weight.get(weight.size()-1);
+                    double setLast = set.get(set.size()-1);
+                    Toast.makeText(getApplicationContext(), "/wei Last: " + weightLast + "/set Last: " + setLast + "/x : " + xLast2, Toast.LENGTH_LONG).show();
+//                drawChart();
+//                drawChart.repaint();
+                }
+
 
             }
+
+
+
         });
+
     }
 
-//    private void drawChart(){
+    private void readFile() {
+
+        File filex = new File(getFilesDir(), "filex.txt");
+        if(filex.exists()) {
+            String line = null;
+            try {
+                // FileReader reads text files in the default encoding.
+                FileReader fileReader =
+                        new FileReader(filex);
+
+                // Always wrap FileReader in BufferedReader.
+                BufferedReader bufferedReader =
+                        new BufferedReader(fileReader);
+
+                while((line = bufferedReader.readLine()) != null) {
+                    System.out.println(line);
+                    x.add(Integer.parseInt(line));
+                }
+                // Always close files.
+                bufferedReader.close();
+            }
+            catch(FileNotFoundException ex) {
+                System.out.println(
+                        "Unable to open filex '" +
+                                filex + "'");
+            }
+            catch(IOException ex) {
+                System.out.println(
+                        "Error reading filex '"
+                                + filex + "'");
+                // Or we could just do this:
+                // ex.printStackTrace();
+            }
+
+        }
+        //End
+
+        File fileweight = new File(getFilesDir(), "fileweight.txt");
+        if(fileweight.exists()) {
+            String line2 = null;
+            try {
+                // FileReader reads text files in the default encoding.
+                FileReader fileReader =
+                        new FileReader(fileweight);
+
+                // Always wrap FileReader in BufferedReader.
+                BufferedReader bufferedReader =
+                        new BufferedReader(fileReader);
+
+                while ((line2 = bufferedReader.readLine()) != null) {
+                    System.out.println(line2);
+                    weight.add(Double.parseDouble(line2));
+                }
+                // Always close files.
+                bufferedReader.close();
+            } catch (FileNotFoundException ex) {
+                System.out.println(
+                        "Unable to open fileweight '" +
+                                fileweight + "'");
+            } catch (IOException ex) {
+                System.out.println(
+                        "Error reading fileweight '"
+                                + fileweight + "'");
+                // Or we could just do this:
+                // ex.printStackTrace();
+            }
+        }
+        //End
+
+        File fileset = new File(getFilesDir(), "fileset.txt");
+        if(fileset.exists()) {
+            String line3 = null;
+            try {
+                // FileReader reads text files in the default encoding.
+                FileReader fileReader =
+                        new FileReader(fileset);
+
+                // Always wrap FileReader in BufferedReader.
+                BufferedReader bufferedReader =
+                        new BufferedReader(fileReader);
+
+                while ((line3 = bufferedReader.readLine()) != null) {
+                    System.out.println(line3);
+                    weight.add(Double.parseDouble(line3));
+                }
+                // Always close files.
+                bufferedReader.close();
+            } catch (FileNotFoundException ex) {
+                System.out.println(
+                        "Unable to open fileset '" +
+                                fileset + "'");
+            } catch (IOException ex) {
+                System.out.println(
+                        "Error reading fileset '"
+                                + fileset + "'");
+                // Or we could just do this:
+                // ex.printStackTrace();
+            }
+        }
+        //End
+    }
+
+    private void writefile() throws IOException {
+        File filex = new File(getFilesDir(), "filex.txt");
+        File fileweight = new File(getFilesDir(), "fileweight.txt");
+        File fileset = new File(getFilesDir(), "fileset.txt");
+        writenow2(filex, x);
+        writenow(fileweight, weight);
+        writenow(fileset, set);
+    }
+
+    private void writenow(File filename, ArrayList<Double> arrayname) throws IOException {
+        BufferedWriter outputWriter = null;
+        outputWriter = new BufferedWriter(new FileWriter(filename));
+        for (int i = 0; i < arrayname.size(); i++) {
+            // Maybe:
+            outputWriter.write(arrayname.get(i)+"");
+            // Or:
+//		    outputWriter.write(Integer.toString(x[i]);
+            outputWriter.newLine();
+        }
+        outputWriter.flush();
+        outputWriter.close();
+    }
+
+    private void writenow2(File filename, ArrayList<Integer> arrayname) throws IOException {
+        BufferedWriter outputWriter = null;
+        outputWriter = new BufferedWriter(new FileWriter(filename));
+        for (int i = 0; i < arrayname.size(); i++) {
+            // Maybe:
+            outputWriter.write(arrayname.get(i)+"");
+            // Or:
+//		    outputWriter.write(Integer.toString(x[i]);
+            outputWriter.newLine();
+        }
+        outputWriter.flush();
+        outputWriter.close();
+    }
+
+
+
+    //    private void drawChart(){
     public void drawChart(){
         //Save Weight - 1st done
 //        int[] x = { 1,2,3,4,5,6,7,8 };
@@ -121,6 +284,7 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
 //        weightSeries.add(x[i], weight[i]);
 //        setSeries.add(x[i],set[i]);
 //    }
+
         for(int i=0;i<x.size();i++){
             weightSeries.add(x.get(i), weight.get(i));
             setSeries.add(x.get(i), set.get(i));
@@ -180,6 +344,29 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
 
         // Adding the Line Chart to the LinearLayout
         chartContainer.addView(chart);
+
+
+
+
+        //다시그리는 리페인트 테스트  - 조금수정 했음.다시 실행해봐야함
+    /*
+        private void repaint(){
+//            lnChart = (LinearLayout) findViewById(R.id.chart);
+            chartContainer = (LinearLayout) findViewById(R.id.chart_container);
+
+            if (chart_container != null) {
+                chartContainer.removeView(chart);
+            }
+
+//            mChartView = ChartFactory.getLineChartView(this, mDataset, mRenderer);
+            chart = ChartFactory.getLineChartView(getBaseContext(), xyMultipleSeriesDataset, multiRenderer);
+
+//            lnChart.addView(mChartView, 0, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+            chartContainer.addView(chart);
+        }
+        */
+
+
     }
 
     @Override
@@ -209,7 +396,7 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
         np.setMinValue(0);   // min value 0
         np.setValue(70);
 
-        np2.setMaxValue(10); // max value 100
+        np2.setMaxValue(9); // max value 100
         np2.setMinValue(0);   // min value 0
         np2.setValue(5);
 
@@ -224,12 +411,24 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
                 x.add(x.size()+1);
                 String weightString = np.getValue() + "." + np2.getValue();
                 Toast.makeText(getApplicationContext(), weightString, Toast.LENGTH_LONG).show();
-                String setString = String.valueOf(set.get(set.size()-1));
-//                String setString = "40.00";  // set value to chk
+
                 double doubleWeight = Double.parseDouble(weightString);
                 weight.add(doubleWeight);
+                String setString;
+
+                if(x.size() == 1){
+                    setString = weightString;
+                } else {
+                    setString = String.valueOf(set.get(set.size()-1));
+                }
+
                 double doubleSet = Double.parseDouble(setString);
                 set.add(doubleSet);
+//                try {
+//                    writefile();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
                 d.dismiss();
             }
         });
@@ -242,7 +441,7 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
         });
 
         //아래는 원래 있던..================
-        d.show();
+//        d.show();
     }
 
     public void show2()
@@ -265,7 +464,7 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
         np.setMinValue(0);   // min value 0
         np.setValue(70);
 
-        np2.setMaxValue(10); // max value 100
+        np2.setMaxValue(9); // max value 100
         np2.setMinValue(0);   // min value 0
         np2.setValue(5);
 
@@ -276,6 +475,23 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
             @Override
             public void onClick(View v) {
                 textview.setText(String.valueOf("Your Target Weight is: " + np.getValue() + "." + np2.getValue())); //set the value to textview
+
+//                x.add(x.size()+1);
+
+                String setString;
+                if(x.size() == 0){
+                    setString = np.getValue() + "." + np2.getValue();
+                    double doubleSet = Double.parseDouble(setString);
+                    set.set(set.size(), doubleSet);
+                    x.add(x.size()+1);
+                    weight.add(0.0);
+                } else {
+                    setString = np.getValue() + "." + np2.getValue();
+                    Toast.makeText(getApplicationContext(), setString, Toast.LENGTH_LONG).show();
+                    double doubleSet = Double.parseDouble(setString);
+                    set.set(set.size()-1, doubleSet);
+                }
+
                 d.dismiss();
             }
         });
@@ -286,8 +502,34 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
                 d.dismiss(); // dismiss the dialog
             }
         });
-        d.show();
+//        d.show();
     }
 
+    @Override
+    public void onRestart() {
+        super.onRestart();
+//        drawChart();
+        Toast.makeText(getApplicationContext(), "리스타트함", Toast.LENGTH_LONG).show();
+
+
+    }
+    public void onResume() {
+        super.onResume();
+//        drawChart();
+//        mChartView.repaint();
+
+        Toast.makeText(getApplicationContext(), "리줌함", Toast.LENGTH_LONG).show();
+
+    }
+
+//    public void onStop() {
+//        super.onStop();
+//        Toast.makeText(getApplicationContext(), "스탑함", Toast.LENGTH_LONG).show();
+////        try {
+////            writefile();
+////        } catch (IOException e) {
+////            e.printStackTrace();
+////        }
+//    }
 
 }
