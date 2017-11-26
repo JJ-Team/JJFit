@@ -15,7 +15,7 @@
         android:layout_height="68dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="monospace"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
@@ -24,7 +24,6 @@
         android:textColor="?attr/colorControlNormal"
         android:textSize="35sp"
         circular:layout_constraintEnd_toEndOf="parent"
-        circular:layout_constraintHorizontal_bias="0.487"
         circular:layout_constraintStart_toStartOf="parent"
         circular:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +33,6 @@
         android:layout_height="33dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
         android:fontFamily="monospace"
         android:text="1. Jumping Jack"
         android:textAlignment="center"
@@ -49,10 +47,11 @@
 
     <WebView
         android:id="@+id/imgWorkout"
-        android:layout_width="282dp"
-        android:layout_height="255dp"
+        android:layout_width="290dp"
+        android:layout_height="220dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
         circular:layout_constraintEnd_toEndOf="parent"
         circular:layout_constraintHorizontal_bias="0.495"
         circular:layout_constraintStart_toStartOf="parent"
@@ -61,8 +60,8 @@
     <com.lylc.widget.circularprogressbar.CircularProgressBar
         android:id="@+id/progBar"
         style="@style/Widget.ProgressBar.Holo.CircularProgressBar"
-        android:layout_width="212dp"
-        android:layout_height="171dp"
+        android:layout_width="169dp"
+        android:layout_height="149dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -74,9 +73,10 @@
         circular:cpb_title="Title"
         circular:layout_constraintBottom_toBottomOf="parent"
         circular:layout_constraintEnd_toEndOf="parent"
+        circular:layout_constraintHorizontal_bias="0.497"
         circular:layout_constraintStart_toStartOf="parent"
-        circular:layout_constraintTop_toBottomOf="@+id/txtWorkoutName"
-        circular:layout_constraintVertical_bias="1.0" />
+        circular:layout_constraintTop_toBottomOf="@+id/imgWorkout"
+        circular:layout_constraintVertical_bias="0.34" />
 
 
 </android.support.constraint.ConstraintLayout>
