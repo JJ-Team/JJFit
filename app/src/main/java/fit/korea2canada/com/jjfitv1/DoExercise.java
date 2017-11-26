@@ -1,7 +1,9 @@
 package fit.korea2canada.com.jjfitv1;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.WebView;
@@ -13,7 +15,8 @@ public class DoExercise extends AppCompatActivity {
     TextView txtWorkName;
     WebView  workImg;
     CircularProgressBar progressBar;
-    int     curWorkout = 10;
+    int     curWorkout = 0;
+    MediaPlayer mPlayer;
 
     String  htmlStranding = "standing.html";
     private String[] workoutTitle = new String[] {
@@ -49,6 +52,14 @@ public class DoExercise extends AppCompatActivity {
                     workImg.loadUrl("file:///android_asset/" + workImageName[curWorkout]);
                     progressBar.setSubTitle("Sec");
                     progressBar.setEnabled(false);
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            mPlayer = MediaPlayer.create(DoExercise.this ,  R.raw.countdown5to1);
+                            mPlayer.start();
+                        }
+                    }, 9000);
                 }
 
                 @Override
