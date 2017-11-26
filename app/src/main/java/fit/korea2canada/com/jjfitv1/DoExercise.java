@@ -1,5 +1,6 @@
 package fit.korea2canada.com.jjfitv1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,7 +13,9 @@ public class DoExercise extends AppCompatActivity {
     TextView txtWorkName;
     WebView  workImg;
     CircularProgressBar progressBar;
+    int     curWorkout = 10;
 
+    String  htmlStranding = "standing.html";
     private String[] workoutTitle = new String[] {
             "1. Jumping Jack", "2. Wall Sit" , "3. Push-up", "4. Abdominal Crunch", "5. Step-up onto Chair", "6. Squat",
             "7. Triceps Dip on Chair", "8. Plank", "9. High Knees", "10. Lunge", "11. Push-up and Rotation", "12. Side Plank"
@@ -29,53 +32,50 @@ public class DoExercise extends AppCompatActivity {
 
 
         txtWorkName = (TextView)findViewById(R.id.txtWorkoutName);
-        txtWorkName.setText(workoutTitle[0]);
+        txtWorkName.setText(workoutTitle[curWorkout]);
         workImg = (WebView)findViewById(R.id.imgWorkout);
-        workImg.loadUrl( "file:///android_asset/" + workImageName[0]);
+        workImg.loadUrl( "file:///android_asset/" + htmlStranding);
         progressBar = (CircularProgressBar) findViewById(R.id.progBar);
-        progressBar.animateProgressTo(0, 15000, 15000, new CircularProgressBar.ProgressAnimationListener() {
-            @Override
-            public void onAnimationStart() {
-                progressBar.setSubTitle("Sec");
-            }
-
-            @Override
-            public void onAnimationFinish() {
-                progressBar.setTitle("Done");
-                progressBar.setSubTitle("");
-            }
-
-            @Override
-            public void onAnimationProgress(int progress) {
-                progressBar.setTitle( Integer.toString(progress/1000) );
-            }
-        });
-
-
-/*
-        //12가지 Workout 진행
-        for (int j=0; j<3; j++) {
-                txtWorkName = (TextView) findViewById(R.id.txtWorkoutName);
-                txtWorkName.setText(mExeTitle[j]);
-
-                Toast.makeText(this, mExeTitle[j], Toast.LENGTH_LONG).show();
-                //Count
-                startCount();
-
-        }
-*/
-
+        progressBar.setProgress(curWorkout);
+        progressBar.setTitle("Ready");
+        progressBar.setSubTitle("");
     }
 
+   public void onClickProgress(View view) {
+        if(curWorkout < 12) {
+            progressBar.animateProgressTo(0, 15000, 15000, new CircularProgressBar.ProgressAnimationListener() {
+                @Override
+                public void onAnimationStart() {
+                    workImg.loadUrl("file:///android_asset/" + workImageName[curWorkout]);
+                    progressBar.setSubTitle("Sec");
+                    progressBar.setEnabled(false);
+                }
 
+                @Override
+                public void onAnimationFinish() {
+                    curWorkout++;
+                    progressBar.setEnabled(true);
+                    workImg.loadUrl( "file:///android_asset/" + htmlStranding);
+                    if(curWorkout == 12) {
+                        progressBar.setTitle("Done");
+                    }else{
+                        txtWorkName.setText(workoutTitle[curWorkout]);
+                        progressBar.setProgress(0);
+                        progressBar.setTitle("Ready");
+                        progressBar.setSubTitle("");
+                    }
+                    progressBar.setSubTitle("");
+                }
 
-    public void onClickProgress(View view) {
-        /*
-        progressBar = (CircularProgressBar) findViewById(R.id.progBar);
-//        progressBar = (ProgressBar) view.findViewBy(R.id.progressBar2);
-        ObjectAnimator animation = ObjectAnimator.ofInt (progressBar, "progress", 0, 500); // see this max value coming back here, we animale towards that value
-        animation.setDuration (30000); //in milliseconds
-        animation.setInterpolator (new DecelerateInterpolator());
-        animation.start ();*/
+                @Override
+                public void onAnimationProgress(int progress) {
+                    progressBar.setTitle(Integer.toString(progress / 1000));
+                }
+            });
+        }
+        else{
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        }
     }
 }
