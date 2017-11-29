@@ -4,7 +4,7 @@ android {
     buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "fit.korea2canada.com.jjfitv1"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -27,6 +27,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.4.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile files('libs/achartengine-1.0.0.jar')
-    compile project(":libProgress")
+    compile project(':libProgress')
 }
 

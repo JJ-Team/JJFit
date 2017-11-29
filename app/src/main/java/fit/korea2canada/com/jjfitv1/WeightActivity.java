@@ -386,7 +386,7 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
     public void onRestart() {
         super.onRestart();
 //        drawChart();
-        Toast.makeText(getApplicationContext(), "리스타트함", Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(), "리스타트함", Toast.LENGTH_LONG).show();
 
 
     }
@@ -395,7 +395,7 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
 //        drawChart();
 //        mChartView.repaint();
 
-        Toast.makeText(getApplicationContext(), "리줌함", Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(), "리줌함", Toast.LENGTH_LONG).show();
 
     }
 
