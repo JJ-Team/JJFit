@@ -12,6 +12,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <service android:name=".SensorListener"/>
+        <receiver
+            android:name=".ShutdownRecevier">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_SHUTDOWN"/>
+                <action android:name="fit.korea2canada.com.jjfitv1.ACTION_SHUTDOWN"/>
+            </intent-filter>
+        </receiver>
+
+
         <activity
             android:name=".Splashscreen"
             android:configChanges="orientation|keyboardHidden|screenSize"

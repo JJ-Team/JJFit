@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.j4velin.pedometer.util;
+package fit.korea2canada.com.jjfitv1.util;
 
 import java.util.Calendar;
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.j4velin.pedometer.util;
+package fit.korea2canada.com.jjfitv1.util;
 
 import android.database.Cursor;
 import android.os.Environment;
@@ -24,13 +24,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 
-import de.j4velin.pedometer.BuildConfig;
+import fit.korea2canada.com.jjfitv1.BuildConfig;
 
 public abstract class Logger {
 
     private static FileWriter fw;
     private static final Date date = new Date();
-    private final static String APP = "Pedometer";
+    private final static String APP = "JJFit";
 
     public static void log(Throwable ex) {
         log(ex.getMessage());

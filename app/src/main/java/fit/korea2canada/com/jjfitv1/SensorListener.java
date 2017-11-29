@@ -1,20 +1,5 @@
-/*
- * Copyright 2013 Thomas Hoffmann
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *     http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
-package de.j4velin.pedometer;
+package fit.korea2canada.com.jjfitv1;
 
 import android.app.AlarmManager;
 import android.app.Notification;
@@ -30,14 +15,10 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.IBinder;
 
-import java.text.NumberFormat;
 import java.util.Date;
-import java.util.Locale;
 
-import de.j4velin.pedometer.ui.Activity_Main;
-import de.j4velin.pedometer.util.Logger;
-import de.j4velin.pedometer.util.Util;
-import de.j4velin.pedometer.widget.WidgetUpdateService;
+import fit.korea2canada.com.jjfitv1.util.Logger;
+import fit.korea2canada.com.jjfitv1.util.Util;
 
 /**
  * Background service which keeps the step-sensor listener alive to always get
@@ -103,7 +84,7 @@ public class SensorListener extends Service implements SensorEventListener {
             lastSaveSteps = steps;
             lastSaveTime = System.currentTimeMillis();
             updateNotificationState();
-            startService(new Intent(this, WidgetUpdateService.class));
+//            startService(new Intent(this, WidgetUpdateService.class));
         }
     }
 
@@ -195,8 +176,8 @@ public class SensorListener extends Service implements SensorEventListener {
     private void updateNotificationState() {
         if (BuildConfig.DEBUG) Logger.log("SensorListener updateNotificationState");
         SharedPreferences prefs = getSharedPreferences("pedometer", Context.MODE_PRIVATE);
-        NotificationManager nm =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//        NotificationManager nm =
+//                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         if (prefs.getBoolean("notification", true)) {
             int goal = prefs.getInt("goal", 10000);
             Database db = Database.getInstance(this);
@@ -207,6 +188,7 @@ public class SensorListener extends Service implements SensorEventListener {
             Notification.Builder notificationBuilder = new Notification.Builder(this);
             if (steps > 0) {
                 if (today_offset == Integer.MIN_VALUE) today_offset = -steps;
+                /*
                 notificationBuilder.setProgress(goal, today_offset + steps, false).setContentText(
                         today_offset + steps >= goal ? getString(R.string.goal_reached_notification,
                                 NumberFormat.getInstance(Locale.getDefault())
@@ -214,25 +196,26 @@ public class SensorListener extends Service implements SensorEventListener {
                                 getString(R.string.notification_text,
                                         NumberFormat.getInstance(Locale.getDefault())
                                                 .format((goal - today_offset - steps))));
+                                                */
             } else { // still no step value?
-                notificationBuilder
-                        .setContentText(getString(R.string.your_progress_will_be_shown_here_soon));
+//                notificationBuilder
+//                        .setContentText(getString(R.string.your_progress_will_be_shown_here_soon));
             }
-            boolean isPaused = prefs.contains("pauseCount");
-            notificationBuilder.setPriority(Notification.PRIORITY_MIN).setShowWhen(false)
-                    .setContentTitle(isPaused ? getString(R.string.ispaused) :
-                            getString(R.string.notification_title)).setContentIntent(PendingIntent
-                    .getActivity(this, 0, new Intent(this, Activity_Main.class),
-                            PendingIntent.FLAG_UPDATE_CURRENT))
-                    .setSmallIcon(R.drawable.ic_notification)
-                    .addAction(isPaused ? R.drawable.ic_resume : R.drawable.ic_pause,
-                            isPaused ? getString(R.string.resume) : getString(R.string.pause),
-                            PendingIntent.getService(this, 4, new Intent(this, SensorListener.class)
-                                            .putExtra("action", ACTION_PAUSE),
-                                    PendingIntent.FLAG_UPDATE_CURRENT)).setOngoing(true);
-            nm.notify(NOTIFICATION_ID, notificationBuilder.build());
+//            boolean isPaused = prefs.contains("pauseCount");
+//            notificationBuilder.setPriority(Notification.PRIORITY_MIN).setShowWhen(false)
+//                    .setContentTitle(isPaused ? getString(R.string.ispaused) :
+//                            getString(R.string.notification_title)).setContentIntent(PendingIntent
+//                    .getActivity(this, 0, new Intent(this, Activity_Main.class),
+//                            PendingIntent.FLAG_UPDATE_CURRENT))
+//                    .setSmallIcon(R.drawable.ic_notification)
+//                    .addAction(isPaused ? R.drawable.ic_resume : R.drawable.ic_pause,
+//                            isPaused ? getString(R.string.resume) : getString(R.string.pause),
+//                            PendingIntent.getService(this, 4, new Intent(this, SensorListener.class)
+//                                            .putExtra("action", ACTION_PAUSE),
+//                                    PendingIntent.FLAG_UPDATE_CURRENT)).setOngoing(true);
+//            nm.notify(NOTIFICATION_ID, notificationBuilder.build());
         } else {
-            nm.cancel(NOTIFICATION_ID);
+//            nm.cancel(NOTIFICATION_ID);
         }
     }
 

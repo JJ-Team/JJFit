@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package de.j4velin.pedometer;
+package fit.korea2canada.com.jjfitv1;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import de.j4velin.pedometer.util.Logger;
-import de.j4velin.pedometer.util.Util;
+import fit.korea2canada.com.jjfitv1.util.Logger;
+import fit.korea2canada.com.jjfitv1.util.Util;
 
 public class ShutdownRecevier extends BroadcastReceiver {
 
