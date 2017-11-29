@@ -95,30 +95,30 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
 //        double setLast = set.get(set.size()-1);
 //        Toast.makeText(this, "/wei Last: " + weightLast + "/set Last: " + setLast + "/x : " + xLast2, Toast.LENGTH_LONG).show();
 //
-        //test 버튼 -> 어레이 확인용
-        Button mBtnTest = (Button) findViewById(R.id.btnTest);
-        mBtnTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(x.size() == 0) {
-                    Toast.makeText(getApplicationContext(), "어레이에 데이터 없음", Toast.LENGTH_SHORT).show();
-                } else {
-                    int xLast2 = x.get(x.size()-1);
-                    double weightLast = weight.get(weight.size()-1);
-                    double setLast = set.get(set.size()-1);
-                    Toast.makeText(getApplicationContext(), "/wei Last: " + weightLast + "/set Last: " + setLast + "/x : " + xLast2, Toast.LENGTH_LONG).show();
-//                drawChart();
-//                drawChart.repaint();
-                    Log.i("x value사이즈 is",""+ x.size());
-                    Log.i("처음 몸무게 is",""+ weight.get(0));
-                }
-
-
-            }
-
-
-
-        });
+        //test 버튼 -> 어레이 확인용====
+//        Button mBtnTest = (Button) findViewById(R.id.btnTest);
+//        mBtnTest.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(x.size() == 0) {
+//                    Toast.makeText(getApplicationContext(), "어레이에 데이터 없음", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    int xLast2 = x.get(x.size()-1);
+//                    double weightLast = weight.get(weight.size()-1);
+//                    double setLast = set.get(set.size()-1);
+//                    Toast.makeText(getApplicationContext(), "/wei Last: " + weightLast + "/set Last: " + setLast + "/x : " + xLast2, Toast.LENGTH_LONG).show();
+////                drawChart();
+////                drawChart.repaint();
+//                    Log.i("x value사이즈 is",""+ x.size());
+//                    Log.i("처음 몸무게 is",""+ weight.get(0));
+//                }
+//
+//
+//            }
+//
+//
+//
+//        });
 
     }
 
@@ -231,6 +231,20 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
         }
         */
     }
+
+    // 다시그리는 것 테스트
+    // https://stackoverflow.com/questions/17780085/achartengine-remove-chart-before-and-redraw-new-chart
+
+//    private void repaint() {
+//        chartContainer = (LinearLayout) findViewById(R.id.chart_container);
+//
+//        if (chart != null) {
+//            chartContainer.removeView(chart);
+//        }
+//
+//        chart = ChartFactory.getLineChartView(this, mDataset, mRenderer);
+//        chartContainer.addView(mChartView, 0, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+//    }
 
     @Override
     public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
