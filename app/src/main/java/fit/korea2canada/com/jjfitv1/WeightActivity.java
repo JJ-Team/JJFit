@@ -71,9 +71,10 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
         if (x.size() == 0 ){
             x.addAll(Arrays.asList(1,2,3,4,5,6,7,8));
             weight.addAll(Arrays.asList(69.0,67.0,68.0, 66.0,67.5,68.0,66.0,67.5));
-            set.addAll(Arrays.asList(63.0,63.0,63.0,63.0,63.0,63.0,63.0,63.0));
+            set.addAll(Arrays.asList(63.0,63.0,63.0,63.5,63.5,63.5,63.5,63.5));
         }
-//        readFile();
+
+        textview.setText( weight.get(weight.size()-1) + "kg");
         initChart();
         drawChart();
     }
@@ -94,7 +95,7 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
 
         weightRenderer = new XYSeriesRenderer();
         // Creating XYSeriesRenderer to customize weightSeries
-        weightRenderer.setColor(Color.RED);
+        weightRenderer.setColor(Color.BLUE);
         weightRenderer.setChartValuesTextSize(30);
         weightRenderer.setPointStyle(PointStyle.CIRCLE);
         weightRenderer.setFillPoints(true);
@@ -103,7 +104,7 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
 
         // Creating XYSeriesRenderer to customize weight Set
         tweightRenderer = new XYSeriesRenderer();
-        tweightRenderer.setColor(Color.GREEN);
+        tweightRenderer.setColor(Color.DKGRAY);
         tweightRenderer.setChartValuesTextSize(30);
         tweightRenderer.setPointStyle(PointStyle.CIRCLE);
         tweightRenderer.setFillPoints(true);
@@ -118,8 +119,8 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
         ChartRenderer.setYTitle("Kg");
         ChartRenderer.setZoomButtonsVisible(true);
 
-        Integer i = Collections.max(weight);
-        ChartRenderer.setYAxisMax(i);
+        Double weitheInterger = Collections.max(weight);
+        ChartRenderer.setYAxisMax(weitheInterger);
 
         for(int i=0;i<x.size();i++){
             ChartRenderer.addXTextLabel(i+1, mMonth[i]);
@@ -222,7 +223,7 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
         {
             @Override
             public void onClick(View v) {
-                textview.setText(String.valueOf("Your Weight is: " + np.getValue() + "." + np2.getValue())); //set the value to textview
+                textview.setText(String.valueOf(np.getValue() + "." + np2.getValue() + "kg")); //set the value to textview
 
                 x.add(x.size()+1);
                 String weightString = np.getValue() + "." + np2.getValue();
@@ -241,7 +242,7 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
                 double doubleSet = Double.parseDouble(setString);
                 set.add(doubleSet);
                 curWeight = (float)doubleWeight;
-                wrtiteWeight(curWeight);
+                writeWeight(curWeight);
                 d.dismiss();
                 drawChart();
             }
@@ -322,11 +323,8 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
         ed.commit();
     }
 
-
-
     public float readWeight(){
         SharedPreferences a = getSharedPreferences(STIORE_NAME, MODE_PRIVATE);
         return a.getFloat(WEIGHT_KEY, curWeight);
     }
-
 }

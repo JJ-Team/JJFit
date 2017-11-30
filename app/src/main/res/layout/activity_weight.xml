@@ -27,11 +27,15 @@
 
         <TextView
             android:id="@+id/txtWeight"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="monospace"
             android:text="Your weight.."
-            android:textSize="18sp"/>
+            android:textAlignment="center"
+            android:textColor="?attr/actionModeSplitBackground"
+            android:textSize="36sp"
+            android:textStyle="bold"/>
 
         <LinearLayout
             android:id="@+id/chart_container"
