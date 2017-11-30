@@ -119,8 +119,8 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
         ChartRenderer.setYTitle("Kg");
         ChartRenderer.setZoomButtonsVisible(true);
 
-        Double weitheInterger = Collections.max(weight);
-        ChartRenderer.setYAxisMax(weitheInterger);
+        Double weightDouble = Collections.max(weight);
+        ChartRenderer.setYAxisMax(weightDouble);
 
         for(int i=0;i<x.size();i++){
             ChartRenderer.addXTextLabel(i+1, mMonth[i]);
@@ -159,8 +159,10 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
             weightSeries.add(x.get(i), weight.get(i));
             tweightSeries.add(x.get(i), set.get(i));
         }
-
-
+//        for(int i=x.size();i<x.size()-5;i--){
+//            weightSeries.add(x.get(i), weight.get(i));
+//            tweightSeries.add(x.get(i), set.get(i));
+//        }
     }
 
     @Override
@@ -184,15 +186,6 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
 
     }
 
-//    public void onStop() {
-//        super.onStop();
-//        Toast.makeText(getApplicationContext(), "스탑함", Toast.LENGTH_LONG).show();
-////        try {
-////            writefile();
-////        } catch (IOException e) {
-////            e.printStackTrace();
-////        }
-//    }
 
 
     public void onclickAddWeight(View view) {
@@ -227,7 +220,7 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
 
                 x.add(x.size()+1);
                 String weightString = np.getValue() + "." + np2.getValue();
-                Toast.makeText(getApplicationContext(), weightString, Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), weightString, Toast.LENGTH_LONG).show();
 
                 double doubleWeight = Double.parseDouble(weightString);
                 weight.add(doubleWeight);

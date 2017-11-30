@@ -22,15 +22,16 @@
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
+            android:layout_width="143dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:baselineAlignBottom="false"
             android:clickable="false"
             android:paddingBottom="0dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
             android:paddingTop="0dp"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/logo2"/>
