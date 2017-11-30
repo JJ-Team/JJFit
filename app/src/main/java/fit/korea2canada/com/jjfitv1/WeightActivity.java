@@ -1,6 +1,7 @@
 package fit.korea2canada.com.jjfitv1;
 
 import android.app.Dialog;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -41,6 +42,10 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
     ArrayList<Double> weight = new ArrayList<Double>();
     ArrayList<Double> set = new ArrayList<Double>();
 
+    private static String STIORE_NAME = "JJfit";
+    private static String WEIGHT_KEY  = "curWeight";
+
+    private float curWeight = 60.0f;
     // Chart elemnets
     XYSeries weightSeries;
     XYSeries tweightSeries;
@@ -379,11 +384,7 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
 
                 double doubleSet = Double.parseDouble(setString);
                 set.add(doubleSet);
-//                try {
-//                    writefile();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
+                curWeight = (float)doubleWeight;
                 d.dismiss();
                 drawChart();
             }
@@ -455,6 +456,20 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
                 d.dismiss(); // dismiss the dialog
             }
         });
+    }
+
+    public void wrtiteWeight(float w){
+        SharedPreferences a = getSharedPreferences(STIORE_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor ed = a.edit();
+        ed.putFloat(WEIGHT_KEY, w);
+        ed.commit();
+    }
+
+
+
+    public float readWeight(){
+        SharedPreferences a = getSharedPreferences(STIORE_NAME, MODE_PRIVATE);
+        return a.getFloat(WEIGHT_KEY, curWeight);
     }
 
 }
