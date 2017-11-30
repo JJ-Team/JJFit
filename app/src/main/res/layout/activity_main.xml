@@ -33,7 +33,7 @@
             android:paddingBottom="0dp"
             android:paddingTop="0dp"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/jfitlogo"/>
+            app:srcCompat="@drawable/logo2"/>
 
         <ImageButton
             android:id="@+id/btnWalking"
