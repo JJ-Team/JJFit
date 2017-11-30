@@ -385,6 +385,7 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
                 double doubleSet = Double.parseDouble(setString);
                 set.add(doubleSet);
                 curWeight = (float)doubleWeight;
+                wrtiteWeight(curWeight);
                 d.dismiss();
                 drawChart();
             }
