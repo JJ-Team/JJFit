@@ -23,15 +23,9 @@ import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class WeightActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener {
     TextView textview;
@@ -124,6 +118,9 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
         ChartRenderer.setYTitle("Kg");
         ChartRenderer.setZoomButtonsVisible(true);
 
+        Integer i = Collections.max(weight);
+        ChartRenderer.setYAxisMax(i);
+
         for(int i=0;i<x.size();i++){
             ChartRenderer.addXTextLabel(i+1, mMonth[i]);
         }
@@ -195,147 +192,6 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
 ////            e.printStackTrace();
 ////        }
 //    }
-
-
-//============  아래는 파일DB 테스트 용으로 최종시 지워야함 ======
-    private void readFile() {
-
-        File filex = new File(getFilesDir(), "filex.txt");
-        if(filex.exists()) {
-            String line = null;
-            try {
-                // FileReader reads text files in the default encoding.
-                FileReader fileReader =
-                        new FileReader(filex);
-
-                // Always wrap FileReader in BufferedReader.
-                BufferedReader bufferedReader =
-                        new BufferedReader(fileReader);
-
-                while((line = bufferedReader.readLine()) != null) {
-                    System.out.println(line);
-                    x.add(Integer.parseInt(line));
-                }
-                // Always close files.
-                bufferedReader.close();
-            }
-            catch(FileNotFoundException ex) {
-                System.out.println(
-                        "Unable to open filex '" +
-                                filex + "'");
-            }
-            catch(IOException ex) {
-                System.out.println(
-                        "Error reading filex '"
-                                + filex + "'");
-                // Or we could just do this:
-                // ex.printStackTrace();
-            }
-
-        }
-        //End
-
-        File fileweight = new File(getFilesDir(), "fileweight.txt");
-        if(fileweight.exists()) {
-            String line2 = null;
-            try {
-                // FileReader reads text files in the default encoding.
-                FileReader fileReader =
-                        new FileReader(fileweight);
-
-                // Always wrap FileReader in BufferedReader.
-                BufferedReader bufferedReader =
-                        new BufferedReader(fileReader);
-
-                while ((line2 = bufferedReader.readLine()) != null) {
-                    System.out.println(line2);
-                    weight.add(Double.parseDouble(line2));
-                }
-                // Always close files.
-                bufferedReader.close();
-            } catch (FileNotFoundException ex) {
-                System.out.println(
-                        "Unable to open fileweight '" +
-                                fileweight + "'");
-            } catch (IOException ex) {
-                System.out.println(
-                        "Error reading fileweight '"
-                                + fileweight + "'");
-                // Or we could just do this:
-                // ex.printStackTrace();
-            }
-        }
-        //End
-
-        File fileset = new File(getFilesDir(), "fileset.txt");
-        if(fileset.exists()) {
-            String line3 = null;
-            try {
-                // FileReader reads text files in the default encoding.
-                FileReader fileReader =
-                        new FileReader(fileset);
-
-                // Always wrap FileReader in BufferedReader.
-                BufferedReader bufferedReader =
-                        new BufferedReader(fileReader);
-
-                while ((line3 = bufferedReader.readLine()) != null) {
-                    System.out.println(line3);
-                    weight.add(Double.parseDouble(line3));
-                }
-                // Always close files.
-                bufferedReader.close();
-            } catch (FileNotFoundException ex) {
-                System.out.println(
-                        "Unable to open fileset '" +
-                                fileset + "'");
-            } catch (IOException ex) {
-                System.out.println(
-                        "Error reading fileset '"
-                                + fileset + "'");
-                // Or we could just do this:
-                // ex.printStackTrace();
-            }
-        }
-        //End
-    }
-
-    private void writefile() throws IOException {
-        File filex = new File(getFilesDir(), "filex.txt");
-        File fileweight = new File(getFilesDir(), "fileweight.txt");
-        File fileset = new File(getFilesDir(), "fileset.txt");
-        writenow2(filex, x);
-        writenow(fileweight, weight);
-        writenow(fileset, set);
-    }
-
-    private void writenow(File filename, ArrayList<Double> arrayname) throws IOException {
-        BufferedWriter outputWriter = null;
-        outputWriter = new BufferedWriter(new FileWriter(filename));
-        for (int i = 0; i < arrayname.size(); i++) {
-            // Maybe:
-            outputWriter.write(arrayname.get(i)+"");
-            // Or:
-//		    outputWriter.write(Integer.toString(x[i]);
-            outputWriter.newLine();
-        }
-        outputWriter.flush();
-        outputWriter.close();
-    }
-
-    private void writenow2(File filename, ArrayList<Integer> arrayname) throws IOException {
-        BufferedWriter outputWriter = null;
-        outputWriter = new BufferedWriter(new FileWriter(filename));
-        for (int i = 0; i < arrayname.size(); i++) {
-            // Maybe:
-            outputWriter.write(arrayname.get(i)+"");
-            // Or:
-//		    outputWriter.write(Integer.toString(x[i]);
-            outputWriter.newLine();
-        }
-        outputWriter.flush();
-        outputWriter.close();
-    }
 
 
     public void onclickAddWeight(View view) {
@@ -458,7 +314,7 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
         });
     }
 
-    public void wrtiteWeight(float w){
+    public void writeWeight(float w){
         SharedPreferences a = getSharedPreferences(STIORE_NAME, MODE_PRIVATE);
         SharedPreferences.Editor ed = a.edit();
         ed.putFloat(WEIGHT_KEY, w);
