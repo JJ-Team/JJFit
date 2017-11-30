@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.WebView;
@@ -15,8 +16,9 @@ public class DoExercise extends AppCompatActivity {
     TextView txtWorkName;
     WebView  workImg;
     CircularProgressBar progressBar;
-    int     curWorkout = 0;
-    MediaPlayer mPlayer;
+    private static int     curWorkout = 0;
+    MediaPlayer soundPlayer = null;
+    Handler hSound = new Handler();
 
     String  htmlStranding = "standing.html";
     private String[] workoutTitle = new String[] {
@@ -52,12 +54,11 @@ public class DoExercise extends AppCompatActivity {
                     workImg.loadUrl("file:///android_asset/" + workImageName[curWorkout]);
                     progressBar.setSubTitle("Sec");
                     progressBar.setEnabled(false);
-                    final Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
+                    hSound.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            mPlayer = MediaPlayer.create(DoExercise.this ,  R.raw.countdown5to1);
-                            mPlayer.start();
+                            soundPlayer = MediaPlayer.create(DoExercise.this ,  R.raw.countdown5to1);
+                            soundPlayer.start();
                         }
                     }, 9000);
                 }
@@ -76,6 +77,7 @@ public class DoExercise extends AppCompatActivity {
                         progressBar.setSubTitle("");
                     }
                     progressBar.setSubTitle("");
+                    soundPlayer = null;
                 }
 
                 @Override
@@ -87,6 +89,18 @@ public class DoExercise extends AppCompatActivity {
         else{
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(!progressBar.isEnabled()){
+            progressBar.clearAnimation();
+            if(soundPlayer != null){
+                soundPlayer.stop();
+            }
+            hSound.removeCallbacksAndMessages(null);
         }
     }
 }
