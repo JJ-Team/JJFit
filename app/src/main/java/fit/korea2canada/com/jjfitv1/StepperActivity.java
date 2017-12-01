@@ -117,8 +117,8 @@ public class StepperActivity extends AppCompatActivity {
          * Customizing graphs
          */
         multiRenderer.setChartTitleTextSize(100);
-        multiRenderer.setAxisTitleTextSize(60);
-        multiRenderer.setLabelsTextSize(60);
+        multiRenderer.setAxisTitleTextSize(40);
+        multiRenderer.setLabelsTextSize(50);
         multiRenderer.setZoomButtonsVisible(false);
         multiRenderer.setPanEnabled(false, false);
         multiRenderer.setClickEnabled(false);
@@ -127,11 +127,13 @@ public class StepperActivity extends AppCompatActivity {
         multiRenderer.setShowGridX(false);
         //multiRenderer.setFitLegend(true);
         multiRenderer.setShowGrid(false);
-        multiRenderer.setZoomEnabled(false);
         multiRenderer.setExternalZoomEnabled(false);
         multiRenderer.setAntialiasing(true);
-        multiRenderer.setInScroll(false);
+//        multiRenderer.setInScroll(false);
+        multiRenderer.setInScroll(true);
+        multiRenderer.setZoomEnabled(true);
         //multiRenderer.setLegendHeight(50);
+
         multiRenderer.setXLabelsAlign(Paint.Align.CENTER);
         multiRenderer.setYLabelsAlign(Paint.Align.LEFT);
         multiRenderer.setTextTypeface("sans_serif", Typeface.NORMAL);
@@ -150,6 +152,7 @@ public class StepperActivity extends AppCompatActivity {
         for(int i=0; i< days.length;i++){
             multiRenderer.addXTextLabel(i, days[i]);
         }
+
 
         // Adding expenseRenderer to multipleRenderer
         multiRenderer.addSeriesRenderer(expenseRenderer);
