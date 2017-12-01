@@ -2,6 +2,7 @@ package fit.korea2canada.com.jjfitv1;
 
 import android.app.Dialog;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -39,7 +40,7 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
     private static String STIORE_NAME = "JJfit";
     private static String WEIGHT_KEY  = "curWeight";
 
-    private float curWeight = 60.0f;
+    private float curWeight = 70.5f;
     // Chart elemnets
     XYSeries weightSeries;
     XYSeries tweightSeries;
@@ -186,8 +187,6 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
 
     }
 
-
-
     public void onclickAddWeight(View view) {
         final Dialog d = new Dialog(WeightActivity.this);
         d.setTitle("Your Weight");
@@ -204,11 +203,12 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
 
         np.setMaxValue(120); // max value 100
         np.setMinValue(0);   // min value 0
-        np.setValue(70);
+        curWeight = readWeight();
+        np.setValue((int)curWeight);
 
         np2.setMaxValue(9); // max value 100
         np2.setMinValue(0);   // min value 0
-        np2.setValue(5);
+        np2.setValue((int)((curWeight - (int)curWeight)*10));
 
         np.setWrapSelectorWheel(false);
         np.setOnValueChangedListener(this);
@@ -266,11 +266,12 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
 
         np.setMaxValue(120); // max value 100
         np.setMinValue(0);   // min value 0
-        np.setValue(70);
+        curWeight = readWeight();
+        np.setValue((int)curWeight);
 
         np2.setMaxValue(9); // max value 100
         np2.setMinValue(0);   // min value 0
-        np2.setValue(5);
+        np2.setValue((int)((curWeight - (int)curWeight)*10));
 
         np.setWrapSelectorWheel(false);
         np.setOnValueChangedListener(this);
@@ -280,21 +281,22 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
             public void onClick(View v) {
                 textview.setText(String.valueOf("Your Target Weight is: " + np.getValue() + "." + np2.getValue())); //set the value to textview
 
-//                x.add(x.size()+1);
-
                 String setString;
+                double doubleSet = 0;
                 if(x.size() == 0){
                     setString = np.getValue() + "." + np2.getValue();
-                    double doubleSet = Double.parseDouble(setString);
+                    doubleSet = Double.parseDouble(setString);
                     set.set(set.size(), doubleSet);
                     x.add(x.size()+1);
                     weight.add(0.0);
                 } else {
                     setString = np.getValue() + "." + np2.getValue();
                     Toast.makeText(getApplicationContext(), setString, Toast.LENGTH_LONG).show();
-                    double doubleSet = Double.parseDouble(setString);
+                    doubleSet = Double.parseDouble(setString);
                     set.set(set.size()-1, doubleSet);
                 }
+                curWeight = (float)doubleSet;
+                writeWeight(curWeight);
 
                 d.dismiss();
                 drawChart();
@@ -309,15 +311,38 @@ public class WeightActivity extends AppCompatActivity implements NumberPicker.On
         });
     }
 
-    public void writeWeight(float w){
+    private void writeWeight(float w){
         SharedPreferences a = getSharedPreferences(STIORE_NAME, MODE_PRIVATE);
         SharedPreferences.Editor ed = a.edit();
         ed.putFloat(WEIGHT_KEY, w);
         ed.commit();
     }
 
-    public float readWeight(){
+    private float readWeight(){
         SharedPreferences a = getSharedPreferences(STIORE_NAME, MODE_PRIVATE);
         return a.getFloat(WEIGHT_KEY, curWeight);
+    }
+
+    private void readWeightFromDB(ArrayList<Integer> arrD, ArrayList<Float> arrW ){
+        Cursor cursor = getContentResolver().query(JJFitProvider.CONTENT_URI, new String[] { JJDB.FIT_DATE, JJDB.FIT_WEIGHT }, null, null, JJDB.FIT_DATE);
+        if(cursor.getCount() > 0) {
+            if (cursor.moveToFirst()) {
+                arrD.clear();
+                arrW.clear();
+                do {
+                    String d = cursor.getString(0);
+                    String w = cursor.getString(1);
+                    arrD.add(Integer.parseInt(d));
+                    arrW.add(Float.parseFloat(w));
+                } while (cursor.moveToNext());
+            }
+        }
+    }
+
+    private void insertWeighttoDB(){
+       // getContentResolver().insert(JJFitProvider.CONTENT_URI, )
+    }
+    private void deleteAllNotes() {
+//        getContentResolver().delete( NotesProvider.NOTE_CONTENT_URI, null, null);
     }
 }
